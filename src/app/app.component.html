@@ -1,0 +1,28 @@
+<div class="center">
+  <h1 style="text-align:center">TASK STATUS</h1>
+  
+  <h2 class="pl-8">Pending Task</h2>
+    <div *ngIf="tasksPending.length > 0">
+      <ul class="tab bg-coralred">
+      <li  *ngFor="let item of tasksPending; index as i;" (click)="pushItemtoInProgess(item, i)"><span class="tasks">{{item}}</span></li>
+    </ul>
+    </div>
+
+  <h2 class="pl-8">Inprogress Task</h2>
+    <div *ngIf="tasksInprogress.length > 0">
+      <ul class="tab bg-orange">
+      <li *ngFor="let item of tasksInprogress; index as i;" (click)="pushItemtoComplete(item, i)" ><span class="tasks">{{item}}</span></li>
+      </ul>  
+    </div>
+  
+  <h2 class="pl-8">Completed Task</h2>
+    <div *ngIf="tasksCompleted.length > 0">
+      <ul class="tab bg-green">
+      <li *ngFor="let item of tasksCompleted; index as i;" ><span class="tasks">{{item}}</span></li>
+      </ul>  
+    </div>
+  </div>
+    
+  
+  
+  
