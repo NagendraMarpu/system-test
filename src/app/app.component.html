@@ -1,28 +1,57 @@
-<div class="center">
-  <h1 style="text-align:center">TASK STATUS</h1>
-  
-  <h2 class="pl-8">Pending Task</h2>
-    <div *ngIf="tasksPending.length > 0">
-      <ul class="tab bg-coralred">
-      <li  *ngFor="let item of tasksPending; index as i;" (click)="pushItemtoInProgess(item, i)"><span class="tasks">{{item}}</span></li>
-    </ul>
+
+<div>
+  <div class="container center">
+      
+    <div class="searchbox">
+    <input [(ngModel)]="searchText" placeholder="search">
     </div>
 
-  <h2 class="pl-8">Inprogress Task</h2>
-    <div *ngIf="tasksInprogress.length > 0">
-      <ul class="tab bg-orange">
-      <li *ngFor="let item of tasksInprogress; index as i;" (click)="pushItemtoComplete(item, i)" ><span class="tasks">{{item}}</span></li>
-      </ul>  
-    </div>
-  
-  <h2 class="pl-8">Completed Task</h2>
-    <div *ngIf="tasksCompleted.length > 0">
-      <ul class="tab bg-green">
-      <li *ngFor="let item of tasksCompleted; index as i;" ><span class="tasks">{{item}}</span></li>
-      </ul>  
-    </div>
+
+      <div class="text-center">
+          <!-- items being paged -->
+          <table class="table table-striped">  
+            <thead>  
+                <tr>  
+                    <th>ID</th>  
+                    <th>First Name</th>  
+                    <th>Last Name</th>  
+                    <th>Email</th>  
+                    <th>Gender</th>  
+                    <th>Date & Time</th>  
+                </tr>  
+            </thead>  
+            <tbody>  
+              <tr *ngFor="let mydata of pagedItems | filter : searchText">  
+                <td class="text-center">{{mydata.id}}</td>  
+                <td>{{mydata.first_name}}</td>  
+                <td>{{mydata.last_name}}</td>  
+                <td>{{mydata.email}}</td>  
+                <td class="">{{mydata.gender}}</td>  
+                <td class="">{{mydata.timestamp}}</td>  
+            </tr>   
+            </tbody>  
+          </table>
+
+          <!-- pager -->
+          <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+              <li [ngClass]="{disabled:pager.currentPage === 1}">
+                  <a (click)="setPage(1)">First</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === 1}">
+                  <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+              </li>
+              <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                  <a (click)="setPage(page)">{{page}}</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                  <a (click)="setPage(pager.currentPage + 1)">Next</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                  <a (click)="setPage(pager.totalPages)">Last</a>
+              </li>
+          </ul>
+      </div>
   </div>
-    
+  <hr />
   
-  
-  
+</div>
